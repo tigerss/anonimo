@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23.03.2013 13:48:37 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.anonimo.api.model.Message" table="MESSAGE">
+        <id name="id" type="java.lang.Long">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="user" class="com.anonimo.api.model.User" fetch="join">
+            <column name="USER" />
+        </many-to-one>
+        <property name="text" type="java.lang.String">
+            <column name="TEXT" />
+        </property>
+        <property name="latitude" type="java.lang.String">
+            <column name="LATITUDE" />
+        </property>
+        <property name="longitude" type="java.lang.String">
+            <column name="LONGITUDE" />
+        </property>
+        <property name="date" type="java.util.Date">
+            <column name="DATE" />
+        </property>
+    </class>
+</hibernate-mapping>
