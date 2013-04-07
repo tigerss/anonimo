@@ -7,6 +7,7 @@ Restful API
 ### USERS
 
 JSON EXAMPLE: {"email":"","id":1,"name":"","password":""}
+<br/>
 ALL FIELDS ARE OPTIONAL
 
 <b>GET ALL USERS</b>
@@ -43,7 +44,9 @@ DELETE http://localhost:8080/Anonimo/users/1
 JSON EXAMPLE: {"date":12,"id":1,"latitude":"","longitude":"","text":"First message","userId":1}
 
 "date" type long = milliseconds since 1970
+<br/>
 "userId" type long
+<br/>
 All other fields types are strings
 
 GET 	/messages 		index
@@ -51,8 +54,11 @@ GET 	/messages 		index
 Response (array of objects): [{"date":12,"id":1,"latitude":"","longitude":"","text":"First message","userId":1},
 {"date":12,"id":2,"latitude":"","longitude":"","text":"Second message","userId":1}]
 
-POST 	/messages 		create 	 
+POST 	/messages 		create
+<br/> 	 
 PUT 	/messages/1 	update 			id="1"
+<br/>
 DELETE 	/messages/1 	delete 			id="1" (NOT IMPLEMENTED)
+<br/>
 GET 	/messages/1 	show 			id="1"
  
