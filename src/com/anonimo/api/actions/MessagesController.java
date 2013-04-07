@@ -47,15 +47,16 @@ public class MessagesController extends ValidationAwareSupport implements ModelD
     }
 
     // Handles /orders/{id} PUT requests
-    public String update() {
-        return "update";
+    public DefaultHttpHeaders update() {
+    	DatabaseHelper.update(model);
+        return new DefaultHttpHeaders("update");
     }
 
     public void setId(String id) {
     	this.id = id;
     	
         if (this.id != null) {
-            this.model = DatabaseHelper.<Message> getObjectById(Long.valueOf(this.id), "Message");
+            this.model = DatabaseHelper.getMessageById(Long.valueOf(this.id));
         }
     }
     

@@ -8,9 +8,9 @@
             <column name="ID" />
             <generator class="identity" />
         </id>
-        <many-to-one name="user" class="com.anonimo.api.model.User" fetch="join">
-            <column name="USER" />
-        </many-to-one>
+        <property name="userId" type="java.lang.Long">
+            <column name="USER_ID" />
+        </property>
         <property name="text" type="java.lang.String">
             <column name="TEXT" />
         </property>
@@ -20,7 +20,7 @@
         <property name="longitude" type="java.lang.String">
             <column name="LONGITUDE" />
         </property>
-        <property name="date" type="java.util.Date">
+        <property name="date" type="java.lang.Long">
             <column name="DATE" />
         </property>
     </class>

@@ -47,8 +47,9 @@ public class UsersController extends ValidationAwareSupport implements ModelDriv
     }
 
     // Handles /orders/{id} PUT requests
-    public String update() {
-        return "update";
+    public DefaultHttpHeaders update() {
+    	DatabaseHelper.update(model);
+        return new DefaultHttpHeaders("update");
     }
 
     public void setId(String id) {

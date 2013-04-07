@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.jboss.logging.Logger;
@@ -16,31 +17,19 @@ public class DatabaseHelper {
 	private static Logger logger = Logger.getLogger(DatabaseHelper.class);
 	
 	public static User getUserById(long id) {
-		User user = new User();
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		Transaction tx = null;
 		try {
-			tx = session.beginTransaction();
-			@SuppressWarnings("rawtypes")
-			List result = session.createQuery("from User user where user.id=?")
-					.setLong(0, id)
-					.list();
-			if (result.size() > 0) {
-				User tempUser = (User) result.get(0);
-				user = new User(tempUser);
-			} else {
-				logger.warn("!!!THIS VEHICLE DOES NOT HAVE AN ACCOUNT, DEFAULT IS USED!!!");
-			}
-			tx.commit();
-		} catch (Exception ex) {
-			if (null != tx) tx.rollback();
-			logger.error(ex.getMessage(), ex);
-		} finally {
-			if (session.isOpen())
-				session.close();
+			return getObjectById(id, User.TAG);
+		} catch (ClassCastException ex) {
+			return new User();
 		}
-		
-		return user;
+	}
+	
+	public static Message getMessageById(long id) {
+		try {
+			return getObjectById(id, Message.TAG);
+		} catch (ClassCastException ex) {
+			return new Message();
+		}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -76,6 +65,10 @@ public class DatabaseHelper {
 	public static void save(Object model) {
 		HibernateUtil.insertObject(model);
 	}
+	
+	public static void update(Object o) {
+		HibernateUtil.updateObject(o);
+	}
 
 	@SuppressWarnings("unchecked")
 	public static Collection<Message> getAllMessages() {
@@ -83,7 +76,8 @@ public class DatabaseHelper {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static <T> T getObjectById(Long id, String tableName) {
+	public static <T> T getObjectById(Long id, String tableName)
+			throws ObjectNotFoundException {
 		Object object = new Object();
 		
 		String queryString = "from " + tableName + " a where a.id=" + id;

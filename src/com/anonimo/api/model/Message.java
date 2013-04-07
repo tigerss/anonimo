@@ -1,21 +1,23 @@
 package com.anonimo.api.model;
 
-import java.util.Date;
 
 public class Message {
 
+	public final static String TAG = Message.class.getSimpleName();
+	
 	private Long id;
-	private User user;
+	private Long userId;
 	private String text;
 	private String latitude;
 	private String longitude;
-	private Date date;
+	private Long date;
 	
-	public Message() { }
+	public Message() {
+	}
 	
 	public Message(Message m) {
 		this.id = m.id;
-		this.user = m.user;
+		this.userId = m.userId;
 		this.text = m.text;
 		this.latitude = m.latitude;
 		this.longitude = m.longitude;
@@ -28,11 +30,11 @@ public class Message {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public User getUser() {
-		return user;
+	public Long getUserId() {
+		return userId;
 	}
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserId(Long user) {
+		this.userId = user;
 	}
 	public String getText() {
 		return text;
@@ -52,10 +54,10 @@ public class Message {
 	public void setLongitude(String longitude) {
 		this.longitude = longitude;
 	}
-	public Date getDate() {
+	public Long getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+	public void setDate(Long date) {
 		this.date = date;
 	}
 }

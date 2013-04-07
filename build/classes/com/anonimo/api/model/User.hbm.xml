@@ -17,11 +17,5 @@
         <property name="email" type="java.lang.String">
             <column name="EMAIL" />
         </property>
-        <set name="messages" table="MESSAGE" inverse="false" lazy="true">
-            <key>
-                <column name="ID" />
-            </key>
-            <one-to-many class="com.anonimo.api.model.Message" />
-        </set>
     </class>
 </hibernate-mapping>
