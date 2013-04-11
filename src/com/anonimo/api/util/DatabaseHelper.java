@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.jboss.logging.Logger;
 
+import com.anonimo.api.model.Comment;
 import com.anonimo.api.model.Message;
 import com.anonimo.api.model.User;
 
@@ -29,6 +30,14 @@ public class DatabaseHelper {
 			return getObjectById(id, Message.TAG);
 		} catch (ClassCastException ex) {
 			return new Message();
+		}
+	}
+
+	public static Comment getCommentById(long id) {
+		try {
+			return getObjectById(id, Message.TAG);
+		} catch (ClassCastException ex) {
+			return new Comment();
 		}
 	}
 
@@ -113,4 +122,5 @@ public class DatabaseHelper {
 		
 		return results;
 	}
+
 }
