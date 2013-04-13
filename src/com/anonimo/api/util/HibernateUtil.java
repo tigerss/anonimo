@@ -63,5 +63,21 @@ public class HibernateUtil {
     			session.close();
     	}
     }
+
+	public static void deleteObject(Object o) {
+    	Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+    	Transaction tx = null;
+    	try {
+			tx = session.beginTransaction();
+			session.delete(o);
+			tx.commit();
+    	} catch (Exception ex) {
+    		if (null != tx) tx.rollback();
+    		logger.error(ex.getMessage(), ex);
+    	} finally {
+    		if (session.isOpen())
+    			session.close();
+    	}
+	}
 }
 

@@ -7,6 +7,7 @@ import org.apache.struts2.convention.annotation.Results;
 import org.apache.struts2.rest.DefaultHttpHeaders;
 import org.apache.struts2.rest.HttpHeaders;
 
+import com.anonimo.api.model.Event;
 import com.anonimo.api.model.Message;
 import com.anonimo.api.util.DatabaseHelper;
 import com.opensymphony.xwork2.ModelDriven;
@@ -21,19 +22,13 @@ public class EventsController extends ValidationAwareSupport implements ModelDri
 	private static final long serialVersionUID = 1L;
 	
 	private String id;
-	private Message model = new Message();
+	private Event model = new Event();
     private Collection<Message> list;
 	
 	public HttpHeaders index() {
-		list = DatabaseHelper.getAllMessages();
+		list = DatabaseHelper.getAllEvents();
 		return new DefaultHttpHeaders("index").disableCaching();
 	}
-	
-    // GET /orders/new
-    public String editNew() {
-        model = new Message();
-        return "editNew";
-    }
 	
     // Handles /messages/{id} GET requests
     public HttpHeaders show() {
@@ -56,7 +51,7 @@ public class EventsController extends ValidationAwareSupport implements ModelDri
     	this.id = id;
     	
         if (this.id != null) {
-            this.model = DatabaseHelper.getMessageById(Long.valueOf(this.id));
+            this.model = DatabaseHelper.getEventById(Long.valueOf(this.id));
         }
     }
     
@@ -67,8 +62,8 @@ public class EventsController extends ValidationAwareSupport implements ModelDri
 
 	@Override
 	public void validate() {
-        if (model.getText() == null || model.getText().length() ==0) {
-            addFieldError("name", "The message text is empty");
+        if (model.getDescription() == null || model.getDescription().length() ==0) {
+            addFieldError("description", "The description is empty");
         }
 	}
 }

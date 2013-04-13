@@ -46,17 +46,28 @@ public class UsersController extends ValidationAwareSupport implements ModelDriv
     	return new DefaultHttpHeaders("create").setLocationId(model.getId());
     }
 
-    // Handles /orders/{id} PUT requests
+    // Handles /users/{id} PUT requests
     public DefaultHttpHeaders update() {
     	DatabaseHelper.update(model);
         return new DefaultHttpHeaders("update");
+    }
+    
+    // Handles /users/{id} DELETE requests
+    public DefaultHttpHeaders destroy() {
+    	DatabaseHelper.destroy(model);
+    	return new DefaultHttpHeaders("destroy");
     }
 
     public void setId(String id) {
     	this.id = id;
     	
         if (this.id != null) {
-            this.model = DatabaseHelper.getUserById(Long.valueOf(this.id));
+        	try {
+        		long idAsLong = Long.valueOf(this.id);
+        		this.model = DatabaseHelper.getUserById(idAsLong);
+        	} catch (NumberFormatException ex) {
+        		this.model = DatabaseHelper.getUserByName(id);
+        	}
         }
     }
     

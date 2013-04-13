@@ -26,28 +26,22 @@ public class CommentsController extends ValidationAwareSupport implements ModelD
     private Collection<Message> list;
 	
 	public HttpHeaders index() {
-		list = DatabaseHelper.getAllMessages();
+		list = DatabaseHelper.getAllComments();
 		return new DefaultHttpHeaders("index").disableCaching();
 	}
 	
-    // GET /orders/new
-    public String editNew() {
-        model = new Comment();
-        return "editNew";
-    }
-	
-    // Handles /messages/{id} GET requests
+    // Handles /comments/{id} GET requests
     public HttpHeaders show() {
         return new DefaultHttpHeaders("show");
     }
     
     public HttpHeaders create() {
     	DatabaseHelper.save(model);
-    	addActionMessage("New message created successfully");
+    	addActionMessage("New comment created successfully");
     	return new DefaultHttpHeaders("create").setLocationId(model.getId());
     }
 
-    // Handles /orders/{id} PUT requests
+    // Handles /comments/{id} PUT requests
     public DefaultHttpHeaders update() {
     	DatabaseHelper.update(model);
         return new DefaultHttpHeaders("update");
@@ -69,7 +63,7 @@ public class CommentsController extends ValidationAwareSupport implements ModelD
 	@Override
 	public void validate() {
         if (model.getText() == null || model.getText().length() ==0) {
-            addFieldError("name", "The message text is empty");
+            addFieldError("comment", "The comment text is empty");
         }
 	}
 }

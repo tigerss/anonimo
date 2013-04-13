@@ -10,8 +10,10 @@ import org.hibernate.Transaction;
 import org.jboss.logging.Logger;
 
 import com.anonimo.api.model.Comment;
+import com.anonimo.api.model.Event;
 import com.anonimo.api.model.Message;
 import com.anonimo.api.model.User;
+import com.anonimo.api.model.UserEvent;
 
 public class DatabaseHelper {
 
@@ -25,6 +27,21 @@ public class DatabaseHelper {
 		}
 	}
 	
+	public static User getUserByName(String name) {
+		User user = new User();
+		
+		String queryString = "from User u where u.name='" + name + "'";
+		List<?> result = queryDatabase(queryString);
+		
+		if (result.size() > 0) {
+			user = (User) result.get(0);
+		} else {
+			logger.warn("!!!No objects found in DB!!!");
+		}
+		
+		return user;
+	}
+	
 	public static Message getMessageById(long id) {
 		try {
 			return getObjectById(id, Message.TAG);
@@ -35,9 +52,25 @@ public class DatabaseHelper {
 
 	public static Comment getCommentById(long id) {
 		try {
-			return getObjectById(id, Message.TAG);
+			return getObjectById(id, Comment.TAG);
 		} catch (ClassCastException ex) {
 			return new Comment();
+		}
+	}
+
+	public static UserEvent getUserEventsById(long id) {
+		try {
+			return getObjectById(id, UserEvent.TAG);
+		} catch (ClassCastException ex) {
+			return new UserEvent();
+		}
+	}
+	
+	public static Event getEventById(long id) {
+		try {
+			return getObjectById(id, Event.TAG);
+		} catch (ClassCastException ex) {
+			return new Event();
 		}
 	}
 
@@ -78,10 +111,30 @@ public class DatabaseHelper {
 	public static void update(Object o) {
 		HibernateUtil.updateObject(o);
 	}
+	
+	public static void destroy(Object o) {
+		HibernateUtil.deleteObject(o);
+	}
 
 	@SuppressWarnings("unchecked")
 	public static Collection<Message> getAllMessages() {
 		return (Collection<Message>) queryDatabase("from Message");
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static Collection<Message> getAllComments() {
+		return (Collection<Message>) queryDatabase("from Comment");
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static Collection<Message> getAllUserEvents() {
+		return (Collection<Message>) queryDatabase("from UserEvent");
+	}
+	
+
+	@SuppressWarnings("unchecked")
+	public static Collection<Message> getAllEvents() {
+		return (Collection<Message>) queryDatabase("from Event");
 	}
 	
 	@SuppressWarnings("unchecked")

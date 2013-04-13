@@ -6,6 +6,7 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
@@ -27,6 +28,12 @@ public class HttpWrapper {
 		return executeMethod(method);
 	}
 
+	public static String httpDelete(String url) {
+		HttpDelete method = new HttpDelete(url);
+		
+		return executeMethod(method);
+	}
+	
 	public static String executeMethod(HttpUriRequest request) {
 		HttpClient client = new DefaultHttpClient();
 		try {
@@ -42,4 +49,5 @@ public class HttpWrapper {
 		
 		return null;
 	}
+
 }

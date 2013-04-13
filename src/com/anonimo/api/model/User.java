@@ -34,6 +34,10 @@ public class User {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	public void setId(String id) {
+//		this.name = id;
+	}
 
 	public String getPassword() {
 		return password;

@@ -18,6 +18,8 @@ public class TestUser extends TestCase {
 
 	private static final String USERS_URL = "http://localhost:8080/Anonimo/users";
 	
+	private static final String USER_NAME = "JUnitTestUser";
+	
 	@Override
 	protected void setUp() throws Exception {
 		// TODO Auto-generated method stub
@@ -33,7 +35,7 @@ public class TestUser extends TestCase {
 	@Test
 	public void testCreateUser() throws UnsupportedEncodingException {
 		JsonObject userJSON = new JsonObject();
-		userJSON.addProperty("name", "test");
+		userJSON.addProperty("name", USER_NAME);
 		userJSON.addProperty("password", "test");
 		userJSON.addProperty("email", "email");
 		
@@ -42,10 +44,26 @@ public class TestUser extends TestCase {
 		
 		System.out.println(response);
 		
-		String actual = HttpWrapper.httpGet(USERS_URL + "/3", null);
+		String actual = HttpWrapper.httpGet(USERS_URL + "/" + USER_NAME, null);
 		Gson gson = new Gson();
 		User actualUser = gson.fromJson(actual, User.class);
 		
-		Assert.assertEquals("test", actualUser.getName());
+		Assert.assertEquals(USER_NAME, actualUser.getName());
+	}
+	
+	@Test
+	public void testDeleteUser() throws UnsupportedEncodingException {
+		String actual = HttpWrapper.httpGet(USERS_URL + "/" + USER_NAME, null);
+		Gson gson = new Gson();
+		User actualUser = gson.fromJson(actual, User.class);
+		
+		Assert.assertEquals(USER_NAME, actualUser.getName());
+		
+		HttpWrapper.httpDelete(USERS_URL + "/" + USER_NAME);
+		
+		actual = HttpWrapper.httpGet(USERS_URL + "/" + USER_NAME, null);
+		actualUser = gson.fromJson(actual, User.class);
+		
+		Assert.assertFalse(USER_NAME.equals(actualUser.getName()));
 	}
 }

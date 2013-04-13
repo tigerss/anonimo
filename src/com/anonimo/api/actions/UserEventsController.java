@@ -8,6 +8,7 @@ import org.apache.struts2.rest.DefaultHttpHeaders;
 import org.apache.struts2.rest.HttpHeaders;
 
 import com.anonimo.api.model.Message;
+import com.anonimo.api.model.UserEvent;
 import com.anonimo.api.util.DatabaseHelper;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Validateable;
@@ -21,21 +22,15 @@ public class UserEventsController extends ValidationAwareSupport implements Mode
 	private static final long serialVersionUID = 1L;
 	
 	private String id;
-	private Message model = new Message();
+	private UserEvent model = new UserEvent();
     private Collection<Message> list;
 	
 	public HttpHeaders index() {
-		list = DatabaseHelper.getAllMessages();
+		list = DatabaseHelper.getAllUserEvents();
 		return new DefaultHttpHeaders("index").disableCaching();
 	}
 	
-    // GET /orders/new
-    public String editNew() {
-        model = new Message();
-        return "editNew";
-    }
-	
-    // Handles /messages/{id} GET requests
+    // Handles /userevents/{id} GET requests
     public HttpHeaders show() {
         return new DefaultHttpHeaders("show");
     }
@@ -56,7 +51,7 @@ public class UserEventsController extends ValidationAwareSupport implements Mode
     	this.id = id;
     	
         if (this.id != null) {
-            this.model = DatabaseHelper.getMessageById(Long.valueOf(this.id));
+            this.model = DatabaseHelper.getUserEventsById(Long.valueOf(this.id));
         }
     }
     
@@ -68,7 +63,7 @@ public class UserEventsController extends ValidationAwareSupport implements Mode
 	@Override
 	public void validate() {
         if (model.getText() == null || model.getText().length() ==0) {
-            addFieldError("name", "The message text is empty");
+            addFieldError("text", "The user event text is empty");
         }
 	}
 }
