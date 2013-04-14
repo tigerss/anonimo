@@ -64,7 +64,8 @@ GET 	/messages/1 	show 			id="1"
  
 ### COMMENTS
 
-JSON:     
+<b>JSON:</b>
+```json
 {
    "date": 0,
    "id": 1,
@@ -72,7 +73,7 @@ JSON:
    "text": "test",
    "userId": 0
 }
-
+```
 <b>ACTIONS:</b>
 
 POST 	/comments 		create
@@ -85,7 +86,8 @@ GET 	/comments/1 	show 			id="1"
 
 ### EVENTS
 
-JSON:
+<b>JSON:</b>
+```json
     {
        "date": 0,
        "description": "First event",
@@ -94,7 +96,7 @@ JSON:
        "longitude": "",
        "userId": 1
    }
-   
+```
 <b>ACTIONS:</b>
 
 POST 	/events 	create
@@ -107,18 +109,19 @@ GET 	/events/1 	show 			id="1"
 
 ### USER_EVENT
 
-JSON:
+<b>JSON:</b>
+```json
     {
        "eventId": 1,
        "id": 1,
        "text": "joined event",
        "userId": 2
-   }
+	}
+```
    
 <b>ACTIONS:</b>
 
-POST 	/user_events 	create
-<br/> 	 
+POST 	/user_events 	create	 
 PUT 	/user_events/1 	update 			id="1"
 <br/>
 DELETE 	/user_events/1 	delete 			id="1"
