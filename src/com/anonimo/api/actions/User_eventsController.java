@@ -16,7 +16,7 @@ import com.opensymphony.xwork2.ValidationAwareSupport;
 @Results({
     @Result(name="success", type="redirectAction", params = {"actionName" , "messages"})
 })
-public class UserEventsController extends ValidationAwareSupport implements ModelDriven<Object>, Validateable {
+public class User_eventsController extends ValidationAwareSupport implements ModelDriven<Object>, Validateable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -67,8 +67,8 @@ public class UserEventsController extends ValidationAwareSupport implements Mode
 
 	@Override
 	public void validate() {
-        if (model.getText() == null || model.getText().length() ==0) {
-            addFieldError("text", "The user event text is empty");
-        }
+//        if (model.getText() == null || model.getText().length() ==0) {
+//            addFieldError("text", "The user event text is empty");
+//        }
 	}
 }
