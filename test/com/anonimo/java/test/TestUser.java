@@ -51,6 +51,20 @@ public class TestUser extends TestCase {
 		Assert.assertEquals(USER_NAME, actualUser.getName());
 	}
 	
+	public void testUpdateUser() throws UnsupportedEncodingException {
+		JsonObject userJSON = new JsonObject();
+		userJSON.addProperty("password", "test2");
+		HttpEntity user = new StringEntity(userJSON.toString());
+		HttpWrapper.httpPut(USERS_URL + "/" + USER_NAME, user);
+		
+		String actual = HttpWrapper.httpGet(USERS_URL + "/" + USER_NAME, null);
+		Gson gson = new Gson();
+		User actualUser = gson.fromJson(actual, User.class);
+		
+		System.out.println(actualUser.getPassword());
+		Assert.assertTrue(userJSON.get("password").getAsString().equals(actualUser.getPassword()));
+	}
+	
 	@Test
 	public void testDeleteUser() throws UnsupportedEncodingException {
 		String actual = HttpWrapper.httpGet(USERS_URL + "/" + USER_NAME, null);

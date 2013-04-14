@@ -9,6 +9,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
@@ -23,6 +24,13 @@ public class HttpWrapper {
 	
 	public static String httpPost(String url, HttpEntity entity) {
 		HttpPost method = new HttpPost(url);
+		method.setEntity(entity);
+		
+		return executeMethod(method);
+	}
+
+	public static String httpPut(String url, HttpEntity entity) {
+		HttpPut method = new HttpPut(url);
 		method.setEntity(entity);
 		
 		return executeMethod(method);

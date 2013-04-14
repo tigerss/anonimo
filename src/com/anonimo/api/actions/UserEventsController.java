@@ -45,6 +45,12 @@ public class UserEventsController extends ValidationAwareSupport implements Mode
     	DatabaseHelper.update(model);
         return new DefaultHttpHeaders("update");
     }
+    
+    // Handles /userevents/{id} DELETE requests
+    public DefaultHttpHeaders destroy() {
+    	DatabaseHelper.destroy(model);
+    	return new DefaultHttpHeaders("destroy");
+    }
 
     public void setId(String id) {
     	this.id = id;

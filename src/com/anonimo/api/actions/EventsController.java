@@ -45,6 +45,12 @@ public class EventsController extends ValidationAwareSupport implements ModelDri
     	DatabaseHelper.update(model);
         return new DefaultHttpHeaders("update");
     }
+    
+    // Handles /events/{id} DELETE requests
+    public DefaultHttpHeaders destroy() {
+    	DatabaseHelper.destroy(model);
+    	return new DefaultHttpHeaders("destroy");
+    }
 
     public void setId(String id) {
     	this.id = id;

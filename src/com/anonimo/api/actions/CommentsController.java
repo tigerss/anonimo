@@ -45,6 +45,12 @@ public class CommentsController extends ValidationAwareSupport implements ModelD
     	DatabaseHelper.update(model);
         return new DefaultHttpHeaders("update");
     }
+    
+    // Handles /comments/{id} DELETE requests
+    public DefaultHttpHeaders destroy() {
+    	DatabaseHelper.destroy(model);
+    	return new DefaultHttpHeaders("destroy");
+    }
 
     public void setId(String id) {
     	this.id = id;

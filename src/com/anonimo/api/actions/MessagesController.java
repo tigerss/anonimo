@@ -51,6 +51,12 @@ public class MessagesController extends ValidationAwareSupport implements ModelD
     	DatabaseHelper.update(model);
         return new DefaultHttpHeaders("update");
     }
+    
+    // Handles /messages/{id} DELETE requests
+    public DefaultHttpHeaders destroy() {
+    	DatabaseHelper.destroy(model);
+    	return new DefaultHttpHeaders("destroy");
+    }
 
     public void setId(String id) {
     	this.id = id;
@@ -68,7 +74,7 @@ public class MessagesController extends ValidationAwareSupport implements ModelD
 	@Override
 	public void validate() {
         if (model.getText() == null || model.getText().length() ==0) {
-            addFieldError("name", "The message text is empty");
+            addFieldError("text", "The message text is empty");
         }
 	}
 }
