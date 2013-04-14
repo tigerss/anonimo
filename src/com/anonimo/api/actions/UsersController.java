@@ -22,20 +22,14 @@ public class UsersController extends ValidationAwareSupport implements ModelDriv
 	
 	private String id;
 	private User model = new User();
-    private Collection<User> list;
+    private Collection<Object> list;
 	
 	public HttpHeaders index() {
 		list = DatabaseHelper.getAllUsers();
 		return new DefaultHttpHeaders("index").disableCaching();
 	}
 	
-    // GET /orders/new
-    public String editNew() {
-        model = new User();
-        return "editNew";
-    }
-	
-    // Handles /orders/{id} GET requests
+    // Handles /users/{id} GET requests
     public HttpHeaders show() {
         return new DefaultHttpHeaders("show");
     }
@@ -56,6 +50,15 @@ public class UsersController extends ValidationAwareSupport implements ModelDriv
     public DefaultHttpHeaders destroy() {
     	DatabaseHelper.destroy(model);
     	return new DefaultHttpHeaders("destroy");
+    }
+    
+    public DefaultHttpHeaders messages() {
+    	list = DatabaseHelper.getMessagesOfUser(model);
+    	return new DefaultHttpHeaders("messages");
+    }
+    
+    public DefaultHttpHeaders comments() {
+    	return new DefaultHttpHeaders("comments");
     }
 
     public void setId(String id) {

@@ -75,8 +75,8 @@ public class DatabaseHelper {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static Collection<User> getAllUsers() {
-		List<User> users = new ArrayList<User>();
+	public static Collection<Object> getAllUsers() {
+		Collection<Object> users = new ArrayList<Object>();
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction tx = null;
 		try {
@@ -104,6 +104,18 @@ public class DatabaseHelper {
 		return users;
 	}
 
+	@SuppressWarnings("unchecked")
+	public static Collection<Object> getMessagesOfUser(User user) {
+		return (Collection<Object>) queryDatabase("from Message m where m.userId="
+				+ user.getId());
+	}
+
+	@SuppressWarnings("unchecked")
+	public static Collection<Object> getCommentsOfMessage(Message model) {
+		return (Collection<Object>) queryDatabase("from Comment c where c.messageId = "
+				+ model.getId());
+	}
+
 	public static void save(Object model) {
 		HibernateUtil.insertObject(model);
 	}
@@ -117,8 +129,8 @@ public class DatabaseHelper {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static Collection<Message> getAllMessages() {
-		return (Collection<Message>) queryDatabase("from Message");
+	public static Collection<Object> getAllMessages() {
+		return (Collection<Object>) queryDatabase("from Message");
 	}
 	
 	@SuppressWarnings("unchecked")

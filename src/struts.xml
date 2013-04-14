@@ -16,6 +16,9 @@
 	
 	<constant name="struts.rest.handlerOverride.JSON" value="com.anonimo.api.handlers.MyJsonContentHandler"/>
 	<constant name="struts.rest.defaultExtension" value="json" />
+	
+<!-- 	<bean type="com.opensymphony.xwork2.util.PatternMatcher" name="namedVariablePatternMatcher" class="com.opensymphony.xwork2.util.NamedVariablePatternMatcher"/> -->
+<!-- 	<constant name="struts.patternMatcher" value="namedVariablePatternMatcher"/> -->
 </struts>
 
 <!-- <struts> -->

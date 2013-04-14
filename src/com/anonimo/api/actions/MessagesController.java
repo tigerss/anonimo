@@ -22,7 +22,7 @@ public class MessagesController extends ValidationAwareSupport implements ModelD
 	
 	private String id;
 	private Message model = new Message();
-    private Collection<Message> list;
+    private Collection<Object> list;
 	
 	public HttpHeaders index() {
 		list = DatabaseHelper.getAllMessages();
@@ -57,7 +57,12 @@ public class MessagesController extends ValidationAwareSupport implements ModelD
     	DatabaseHelper.destroy(model);
     	return new DefaultHttpHeaders("destroy");
     }
-
+    
+    public DefaultHttpHeaders comments() {
+    	list = DatabaseHelper.getCommentsOfMessage(model);
+    	return new DefaultHttpHeaders("comments");
+    }
+    
     public void setId(String id) {
     	this.id = id;
     	
