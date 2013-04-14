@@ -7,7 +7,6 @@ import org.apache.struts2.convention.annotation.Results;
 import org.apache.struts2.rest.DefaultHttpHeaders;
 import org.apache.struts2.rest.HttpHeaders;
 
-import com.anonimo.api.model.Message;
 import com.anonimo.api.model.UserEvent;
 import com.anonimo.api.util.DatabaseHelper;
 import com.opensymphony.xwork2.ModelDriven;
@@ -23,7 +22,7 @@ public class UserEventsController extends ValidationAwareSupport implements Mode
 	
 	private String id;
 	private UserEvent model = new UserEvent();
-    private Collection<Message> list;
+    private Collection<UserEvent> list;
 	
 	public HttpHeaders index() {
 		list = DatabaseHelper.getAllUserEvents();

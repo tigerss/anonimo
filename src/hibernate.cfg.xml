@@ -22,5 +22,8 @@
         
         <mapping resource="com/anonimo/api/model/User.hbm.xml"/>
         <mapping resource="com/anonimo/api/model/Message.hbm.xml"/>
+        <mapping resource="com/anonimo/api/model/Comment.hbm.xml"/>
+        <mapping resource="com/anonimo/api/model/Event.hbm.xml"/>
+        <mapping resource="com/anonimo/api/model/UserEvent.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

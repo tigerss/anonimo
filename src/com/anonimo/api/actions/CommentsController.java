@@ -8,7 +8,6 @@ import org.apache.struts2.rest.DefaultHttpHeaders;
 import org.apache.struts2.rest.HttpHeaders;
 
 import com.anonimo.api.model.Comment;
-import com.anonimo.api.model.Message;
 import com.anonimo.api.util.DatabaseHelper;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Validateable;
@@ -23,7 +22,7 @@ public class CommentsController extends ValidationAwareSupport implements ModelD
 	
 	private String id;
 	private Comment model = new Comment();
-    private Collection<Message> list;
+    private Collection<Comment> list;
 	
 	public HttpHeaders index() {
 		list = DatabaseHelper.getAllComments();

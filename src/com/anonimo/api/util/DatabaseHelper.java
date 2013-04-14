@@ -122,19 +122,18 @@ public class DatabaseHelper {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static Collection<Message> getAllComments() {
-		return (Collection<Message>) queryDatabase("from Comment");
+	public static Collection<Comment> getAllComments() {
+		return (Collection<Comment>) queryDatabase("from Comment");
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static Collection<Message> getAllUserEvents() {
-		return (Collection<Message>) queryDatabase("from UserEvent");
+	public static Collection<UserEvent> getAllUserEvents() {
+		return (Collection<UserEvent>) queryDatabase("from UserEvent");
 	}
-	
 
 	@SuppressWarnings("unchecked")
-	public static Collection<Message> getAllEvents() {
-		return (Collection<Message>) queryDatabase("from Event");
+	public static Collection<Event> getAllEvents() {
+		return (Collection<Event>) queryDatabase("from Event");
 	}
 	
 	@SuppressWarnings("unchecked")
