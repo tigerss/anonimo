@@ -1,66 +1,65 @@
 package com.anonimo.api.actions;
 
 import java.util.Collection;
+import java.util.Iterator;
 
 import org.apache.struts2.rest.DefaultHttpHeaders;
 import org.apache.struts2.rest.HttpHeaders;
 
-import com.anonimo.api.model.User;
+import com.anonimo.api.model.Vote;
 import com.anonimo.api.util.DatabaseHelper;
 import com.opensymphony.xwork2.ModelDriven;
 
-public class UsersController implements ModelDriven<Object> {
+public class VotesController  implements ModelDriven<Object>{
 
-	private String id;
-	private User model = new User();
-    private Collection<Object> list;
 	
+	private String id;
+	private Vote model = new Vote();
+    private Collection<Vote> list;
+   
 	public HttpHeaders index() {
-		list = DatabaseHelper.getAllUsers();
+		list = DatabaseHelper.getAllVotes();
 		return new DefaultHttpHeaders("index").disableCaching();
 	}
 	
-    // Handles /users/{id} GET requests
+    // Handles /userevents/{id} GET requests
     public HttpHeaders show() {
         return new DefaultHttpHeaders("show");
     }
     
     public HttpHeaders create() {
-    	DatabaseHelper.save(model);
+    	Collection<Vote> result = DatabaseHelper.getVotesByUserAndMessage(model.getUserId(), model.getMessageId());
+    	if (false == result.isEmpty()) {
+    		if (model.hasValidValue()) {
+    			Iterator<Vote> iterator = result.iterator();
+    			Vote vote = iterator.next();
+    			vote.setValue(model.getValue());
+    			model = new Vote(vote);
+    			DatabaseHelper.update(model);
+    		}
+    	} else {
+    		DatabaseHelper.save(model);
+    	}
     	return new DefaultHttpHeaders("create").setLocationId(model.getId());
     }
 
-    // Handles /users/{id} PUT requests
+    // Handles /orders/{id} PUT requests
     public DefaultHttpHeaders update() {
     	DatabaseHelper.update(model);
         return new DefaultHttpHeaders("update");
     }
     
-    // Handles /users/{id} DELETE requests
+    // Handles /userevents/{id} DELETE requests
     public DefaultHttpHeaders destroy() {
     	DatabaseHelper.destroy(model);
     	return new DefaultHttpHeaders("destroy");
-    }
-    
-    public DefaultHttpHeaders messages() {
-    	list = DatabaseHelper.getMessagesOfUser(model);
-    	return new DefaultHttpHeaders("messages");
-    }
-    
-    public DefaultHttpHeaders comments() {
-    	return new DefaultHttpHeaders("comments");
     }
 
     public void setId(String id) {
     	this.id = id;
     	
         if (this.id != null) {
-        	try {
-        		long idAsLong = Long.valueOf(this.id);
-        		this.model = DatabaseHelper.getUserById(idAsLong);
-        	} catch (NumberFormatException ex) {
-        		this.model = DatabaseHelper.getUserByName(id);
-        	}
+            this.model = DatabaseHelper.getVoteById(Long.valueOf(this.id));
         }
     }
     

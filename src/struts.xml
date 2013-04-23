@@ -6,19 +6,42 @@
 <struts>
     <bean name="myJson" type="org.apache.struts2.rest.handler.ContentTypeHandler" class="com.anonimo.api.handlers.MyJsonContentHandler" />
     
+    <!-- 	REST and non-RESTful URL's Together Configuration -->
+<!-- 	<constant name="struts.action.extension" value="xhtml,,xml,json,action"/> -->
+<!-- 	<constant name="struts.mapper.class" value="org.apache.struts2.dispatcher.mapper.PrefixBasedActionMapper" /> -->
+<!--  	<constant name="struts.mapper.prefixMapping" value="/rest:rest,:struts"/> -->
+ 	
+<!--  	REST Only Configuration -->
     <constant name="struts.mapper.class" value="rest"></constant>
-    <constant name="struts.mapper.postMethodName" value="create"></constant>
+    <constant name="struts.rest.content.restrictToGET" value="false"></constant>
+<!--     <constant name="struts.mapper.postMethodName" value="create"></constant> -->
     
     <constant name="struts.convention.action.suffix" value="Controller"/>
 	<constant name="struts.convention.action.mapAllMatches" value="true"/>
 	<constant name="struts.convention.default.parent.package" value="rest-default"/>
 	<constant name="struts.convention.package.locators" value="actions"/>
 	
+<!-- 	<constant name="struts.rest.namespace" value="/rest"/> -->
 	<constant name="struts.rest.handlerOverride.JSON" value="com.anonimo.api.handlers.MyJsonContentHandler"/>
 	<constant name="struts.rest.defaultExtension" value="json" />
 	
 <!-- 	<bean type="com.opensymphony.xwork2.util.PatternMatcher" name="namedVariablePatternMatcher" class="com.opensymphony.xwork2.util.NamedVariablePatternMatcher"/> -->
 <!-- 	<constant name="struts.patternMatcher" value="namedVariablePatternMatcher"/> -->
+
+<!--     <constant name="struts.enable.SlashesInActionNames" value="true"/> -->
+<!-- 	<constant name="struts.mapper.alwaysSelectFullNamespace" value="false"/> -->
+	
+<!-- 	<package name="rest" namespace="/rest" extends="struts-default"> -->
+<!-- 	    <action name="users/*" class="actions.UsersController"> -->
+<!-- 	        <param name="id">{0}</param> -->
+<!-- 	    </action> -->
+<!-- 	</package> -->
+	
+<!--     <package name="default" namespace="/" extends="struts-default"> -->
+        
+<!--         <action name="/api/1.0/*" method="{1}" class="com.anonimo.api.actions.custom.Test"> -->
+<!--         </action> -->
+<!--     </package>	 -->
 </struts>
 
 <!-- <struts> -->

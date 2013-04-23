@@ -2,24 +2,15 @@ package com.anonimo.api.actions;
 
 import java.util.Collection;
 
-import org.apache.struts2.convention.annotation.Result;
-import org.apache.struts2.convention.annotation.Results;
 import org.apache.struts2.rest.DefaultHttpHeaders;
 import org.apache.struts2.rest.HttpHeaders;
 
 import com.anonimo.api.model.Message;
 import com.anonimo.api.util.DatabaseHelper;
 import com.opensymphony.xwork2.ModelDriven;
-import com.opensymphony.xwork2.Validateable;
-import com.opensymphony.xwork2.ValidationAwareSupport;
 
-@Results({
-    @Result(name="success", type="redirectAction", params = {"actionName" , "messages"})
-})
-public class MessagesController extends ValidationAwareSupport implements ModelDriven<Object>, Validateable {
+public class MessagesController implements ModelDriven<Object> {
 
-	private static final long serialVersionUID = 1L;
-	
 	private String id;
 	private Message model = new Message();
     private Collection<Object> list;
@@ -42,7 +33,6 @@ public class MessagesController extends ValidationAwareSupport implements ModelD
     
     public HttpHeaders create() {
     	DatabaseHelper.save(model);
-    	addActionMessage("New message created successfully");
     	return new DefaultHttpHeaders("create").setLocationId(model.getId());
     }
 
@@ -63,6 +53,11 @@ public class MessagesController extends ValidationAwareSupport implements ModelD
     	return new DefaultHttpHeaders("comments");
     }
     
+    public DefaultHttpHeaders votes() {
+    	list = DatabaseHelper.getVotesOfMessage(model);
+    	return new DefaultHttpHeaders("votes");
+    }
+    
     public void setId(String id) {
     	this.id = id;
     	
@@ -75,11 +70,4 @@ public class MessagesController extends ValidationAwareSupport implements ModelD
     public Object getModel() {
         return (list != null ? list : model);
     }
-
-	@Override
-	public void validate() {
-        if (model.getText() == null || model.getText().length() ==0) {
-            addFieldError("text", "The message text is empty");
-        }
-	}
 }

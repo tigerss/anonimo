@@ -12,8 +12,10 @@ import org.jboss.logging.Logger;
 import com.anonimo.api.model.Comment;
 import com.anonimo.api.model.Event;
 import com.anonimo.api.model.Message;
+import com.anonimo.api.model.MessageVotes;
 import com.anonimo.api.model.User;
 import com.anonimo.api.model.UserEvent;
+import com.anonimo.api.model.Vote;
 
 public class DatabaseHelper {
 
@@ -74,6 +76,14 @@ public class DatabaseHelper {
 		}
 	}
 
+	public static Vote getVoteById(long id) {
+		try {
+			return getObjectById(id, Vote.TAG);
+		} catch (ClassCastException ex) {
+			return new Vote();
+		}
+	}
+
 	@SuppressWarnings("unchecked")
 	public static Collection<Object> getAllUsers() {
 		Collection<Object> users = new ArrayList<Object>();
@@ -115,6 +125,23 @@ public class DatabaseHelper {
 		return (Collection<Object>) queryDatabase("from Comment c where c.messageId = "
 				+ model.getId());
 	}
+	
+	public static Collection<Object> getVotesOfMessage(Message model) {
+		List<?> upVotes = queryDatabase("select COUNT(*) from Vote v where v.messageId=" + model.getId() + " and v.value='" + Vote.UP + "'");
+		List<?> downVotes = queryDatabase("select COUNT(*) from Vote v where v.messageId=" + model.getId() + " and v.value='" + Vote.DOWN + "'");
+		
+		Number ups = (Number) upVotes.get(0);
+		Number downs = (Number) downVotes.get(0);
+		
+		MessageVotes messageStats = new MessageVotes();
+		messageStats.setUpVotes(ups);
+		messageStats.setDownVotes(downs);
+		
+		Collection<Object> result = new ArrayList<Object>();
+		result.add(messageStats);
+		
+		return result;
+	}
 
 	public static void save(Object model) {
 		HibernateUtil.insertObject(model);
@@ -146,6 +173,16 @@ public class DatabaseHelper {
 	@SuppressWarnings("unchecked")
 	public static Collection<Event> getAllEvents() {
 		return (Collection<Event>) queryDatabase("from Event");
+	}
+
+	@SuppressWarnings("unchecked")
+	public static Collection<Vote> getAllVotes() {
+		return (Collection<Vote>) queryDatabase("from Vote");
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static Collection<Vote> getVotesByUserAndMessage(long userId, long messageId) {
+		return (Collection<Vote>) queryDatabase("from Vote v where v.userId=" + userId + " and messageId=" + messageId);
 	}
 	
 	@SuppressWarnings("unchecked")
