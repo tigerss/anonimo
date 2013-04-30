@@ -80,6 +80,23 @@ BODY:
 
 DELETE http://localhost:8080/Anonimo/users/1
 
+<b>CUSTOM ACTIONS</b>
+
+GET /users/y/messages returns messages of user "y"
+Response:
+```
+[
+   {
+       "date": 1366230231,
+       "id": 4,
+       "latitude": "44.435519",
+       "longitude": "26.102527",
+       "text": "Si ce mai face fetilii? Ie bini di tat?",
+       "userId": 7
+   }
+]
+```
+
 ### MESSAGES
 
 <b>JSON EXAMPLE:</b> 
@@ -129,6 +146,22 @@ PUT 	/messages/1 	update 			id="1"
 DELETE 	/messages/1 	delete 			id="1"
 <br/>
 GET 	/messages/1 	show 			id="1"
+
+<b>CUSTOM ACTIONS</b>
+
+GET /messages/7/comments returns comments of message #7
+Response:
+```
+[
+   {
+	   "date": 1366419985,
+	   "id": 2,
+	   "messageId": 7,
+	   "text": "Da, foarte smecher!",
+	   "userId": 31
+   }
+]
+```
  
 ### COMMENTS
 
@@ -195,3 +228,42 @@ PUT 	/user_events/1 	update 			id="1"
 DELETE 	/user_events/1 	delete 			id="1"
 <br/>
 GET 	/user_events/1 	show 			id="1"
+
+### VOTES
+
+<b>JSON:</b>
+```json
+{
+   "id": 1,
+   "messageId": 1,
+   "userId": 7,
+   "value": "up"
+}
+```
+
+<b>CUSTOM ACTIONS:</b>   
+
+GET /messages/{id}/votes (get votes for a message)
+
+Ex: 
+GET /messages/1/votes
+Result:
+```
+[
+   {
+	   "downVotes": 2,
+	   "upVotes": 1
+   }
+]
+```
+
+<b>DEFAULT ACTIONS:</b>
+
+POST 	/votes 		create	 
+PUT 	/votes/1 	update 			id="1"
+<br/>
+DELETE 	/votes/1 	delete 			id="1"
+<br/>
+GET 	/votes/1 	show 			id="1"
+
+
