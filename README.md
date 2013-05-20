@@ -67,8 +67,8 @@ BODY:
 <b>UPDATE USER HAVING ID 1</b>
 
 PUT http://localhost:8080/Anonimo/users/1 
-OR
-POST /users/1/updateInfo
+<br>OR</br>
+<br>POST /users/1/updateInfo</br>
 
 BODY: 
 ```json
@@ -98,6 +98,8 @@ Response:
    }
 ]
 ```
+
+<br>POST /users/1/updateInfo</br> (Update user through POST)
 
 ### MESSAGES
 
@@ -210,6 +212,22 @@ DELETE 	/events/1 	delete 			id="1"
 <br/>
 GET 	/events/1 	show 			id="1"
 
+<b>CUSTOM ACTIONS:</b>
+
+GET /events/{id}/participants (get participants for event)
+
+Ex: 
+GET /events/1/participants
+Result:
+```
+[
+   {
+       "eventId": 1,
+       "participants": 2
+   }
+]
+```
+
 ### USER_EVENT
 
 <b>JSON:</b>
@@ -257,33 +275,6 @@ Result:
 	   "upVotes": 1
    }
 ]
-```
-
-GET /events/{id}/participants (get participants for event)
-
-Ex: 
-GET /events/1/participants
-Result:
-```
-[
-   {
-       "eventId": 1,
-       "participants": 2
-   }
-]
-```
-
-<b>UPDATE USER HAVING ID 1</b>
-
-POST /users/1/updateInfo
-
-BODY: 
-```json
-{
-	"email":"another address",
-	"name":"another name",
-	"password":"another password"
-}
 ```
 
 <b>DEFAULT ACTIONS:</b>
