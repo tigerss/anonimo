@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 23.03.2013 13:48:37 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="com.anonimo.api.model.Comment" table="COMMENT">
+    <class name="com.anonimo.api.model.database.Comment" table="COMMENT">
         <id name="id" type="java.lang.Long">
             <column name="ID" />
             <generator class="identity" />

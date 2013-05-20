@@ -7,7 +7,7 @@ import org.apache.struts2.convention.annotation.Results;
 import org.apache.struts2.rest.DefaultHttpHeaders;
 import org.apache.struts2.rest.HttpHeaders;
 
-import com.anonimo.api.model.Comment;
+import com.anonimo.api.model.database.Comment;
 import com.anonimo.api.util.DatabaseHelper;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Validateable;

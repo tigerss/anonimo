@@ -7,7 +7,7 @@ import org.apache.struts2.convention.annotation.Results;
 import org.apache.struts2.rest.DefaultHttpHeaders;
 import org.apache.struts2.rest.HttpHeaders;
 
-import com.anonimo.api.model.Event;
+import com.anonimo.api.model.database.Event;
 import com.anonimo.api.util.DatabaseHelper;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Validateable;
@@ -22,7 +22,7 @@ public class EventsController extends ValidationAwareSupport implements ModelDri
 	
 	private String id;
 	private Event model = new Event();
-    private Collection<Event> list;
+    private Collection<Object> list;
 	
 	public HttpHeaders index() {
 		list = DatabaseHelper.getAllEvents();
@@ -50,6 +50,11 @@ public class EventsController extends ValidationAwareSupport implements ModelDri
     public DefaultHttpHeaders destroy() {
     	DatabaseHelper.destroy(model);
     	return new DefaultHttpHeaders("destroy");
+    }
+    
+    public DefaultHttpHeaders participants() {
+    	list = DatabaseHelper.getParticipants(model);
+    	return new DefaultHttpHeaders("participants");
     }
 
     public void setId(String id) {

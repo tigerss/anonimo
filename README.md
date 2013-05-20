@@ -66,7 +66,9 @@ BODY:
 ```
 <b>UPDATE USER HAVING ID 1</b>
 
-PUT http://localhost:8080/Anonimo/users/1
+PUT http://localhost:8080/Anonimo/users/1 
+OR
+POST /users/1/updateInfo
 
 BODY: 
 ```json
@@ -255,6 +257,33 @@ Result:
 	   "upVotes": 1
    }
 ]
+```
+
+GET /events/{id}/participants (get participants for event)
+
+Ex: 
+GET /events/1/participants
+Result:
+```
+[
+   {
+       "eventId": 1,
+       "participants": 2
+   }
+]
+```
+
+<b>UPDATE USER HAVING ID 1</b>
+
+POST /users/1/updateInfo
+
+BODY: 
+```json
+{
+	"email":"another address",
+	"name":"another name",
+	"password":"another password"
+}
 ```
 
 <b>DEFAULT ACTIONS:</b>

@@ -5,7 +5,7 @@ import java.util.Collection;
 import org.apache.struts2.rest.DefaultHttpHeaders;
 import org.apache.struts2.rest.HttpHeaders;
 
-import com.anonimo.api.model.User;
+import com.anonimo.api.model.database.User;
 import com.anonimo.api.util.DatabaseHelper;
 import com.opensymphony.xwork2.ModelDriven;
 
@@ -49,6 +49,11 @@ public class UsersController implements ModelDriven<Object> {
     
     public DefaultHttpHeaders comments() {
     	return new DefaultHttpHeaders("comments");
+    }
+    
+    public DefaultHttpHeaders updateInfo() {
+    	DatabaseHelper.update(model);
+    	return new DefaultHttpHeaders("changePasword");
     }
 
     public void setId(String id) {

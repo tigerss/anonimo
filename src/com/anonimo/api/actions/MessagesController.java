@@ -5,7 +5,7 @@ import java.util.Collection;
 import org.apache.struts2.rest.DefaultHttpHeaders;
 import org.apache.struts2.rest.HttpHeaders;
 
-import com.anonimo.api.model.Message;
+import com.anonimo.api.model.database.Message;
 import com.anonimo.api.util.DatabaseHelper;
 import com.opensymphony.xwork2.ModelDriven;
 

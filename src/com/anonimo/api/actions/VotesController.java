@@ -6,7 +6,7 @@ import java.util.Iterator;
 import org.apache.struts2.rest.DefaultHttpHeaders;
 import org.apache.struts2.rest.HttpHeaders;
 
-import com.anonimo.api.model.Vote;
+import com.anonimo.api.model.database.Vote;
 import com.anonimo.api.util.DatabaseHelper;
 import com.opensymphony.xwork2.ModelDriven;
 

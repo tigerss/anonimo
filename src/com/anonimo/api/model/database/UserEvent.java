@@ -1,4 +1,4 @@
-package com.anonimo.api.model;
+package com.anonimo.api.model.database;
 
 
 public class UserEvent {

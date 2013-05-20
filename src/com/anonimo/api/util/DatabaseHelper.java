@@ -9,13 +9,14 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.jboss.logging.Logger;
 
-import com.anonimo.api.model.Comment;
-import com.anonimo.api.model.Event;
-import com.anonimo.api.model.Message;
+import com.anonimo.api.model.EventParticipants;
 import com.anonimo.api.model.MessageVotes;
-import com.anonimo.api.model.User;
-import com.anonimo.api.model.UserEvent;
-import com.anonimo.api.model.Vote;
+import com.anonimo.api.model.database.Comment;
+import com.anonimo.api.model.database.Event;
+import com.anonimo.api.model.database.Message;
+import com.anonimo.api.model.database.User;
+import com.anonimo.api.model.database.UserEvent;
+import com.anonimo.api.model.database.Vote;
 
 public class DatabaseHelper {
 
@@ -142,6 +143,17 @@ public class DatabaseHelper {
 		
 		return result;
 	}
+	
+	public static Collection<Object> getParticipants(Event model) {
+		List<?> participants = queryDatabase("SELECT COUNT(*) from UserEvent e where e.eventId="+model.getId());
+		Number numberOfParticipants = (Number) participants.get(0);
+		
+		EventParticipants eventStats = new EventParticipants(model.getId(), numberOfParticipants.intValue());
+		
+		Collection<Object> result = new ArrayList<Object>();
+		result.add(eventStats);
+		return result;
+	}
 
 	public static void save(Object model) {
 		HibernateUtil.insertObject(model);
@@ -171,8 +183,8 @@ public class DatabaseHelper {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static Collection<Event> getAllEvents() {
-		return (Collection<Event>) queryDatabase("from Event");
+	public static Collection<Object> getAllEvents() {
+		return (Collection<Object>) queryDatabase("from Event");
 	}
 
 	@SuppressWarnings("unchecked")

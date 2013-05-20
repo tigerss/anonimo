@@ -9,7 +9,7 @@ import org.apache.http.HttpEntity;
 import org.apache.http.entity.StringEntity;
 import org.junit.Test;
 
-import com.anonimo.api.model.User;
+import com.anonimo.api.model.database.User;
 import com.anonimo.java.test.util.HttpWrapper;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;

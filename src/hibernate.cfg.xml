@@ -20,11 +20,11 @@
 		<property name="hibernate.c3p0.min_size">10</property>
 		<property name="hibernate.c3p0.timeout">200</property>
         
-        <mapping resource="com/anonimo/api/model/User.hbm.xml"/>
-        <mapping resource="com/anonimo/api/model/Message.hbm.xml"/>
-        <mapping resource="com/anonimo/api/model/Comment.hbm.xml"/>
-        <mapping resource="com/anonimo/api/model/Event.hbm.xml"/>
-        <mapping resource="com/anonimo/api/model/UserEvent.hbm.xml"/>
-        <mapping resource="com/anonimo/api/model/Vote.hbm.xml"/>
+        <mapping resource="com/anonimo/api/model/database/User.hbm.xml"/>
+        <mapping resource="com/anonimo/api/model/database/Message.hbm.xml"/>
+        <mapping resource="com/anonimo/api/model/database/Comment.hbm.xml"/>
+        <mapping resource="com/anonimo/api/model/database/Event.hbm.xml"/>
+        <mapping resource="com/anonimo/api/model/database/UserEvent.hbm.xml"/>
+        <mapping resource="com/anonimo/api/model/database/Vote.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

@@ -1,23 +1,26 @@
-package com.anonimo.api.model;
+package com.anonimo.api.model.database;
 
 
-public class Comment {
+public class Message {
 
-	public final static String TAG = Comment.class.getSimpleName();
+	public final static String TAG = Message.class.getSimpleName();
 	
 	private Long id;
 	private Long userId;
-	private Long messageId;
 	private String text;
+	private String latitude;
+	private String longitude;
 	private Long date;
 	
-	public Comment() {
+	public Message() {
 	}
 	
-	public Comment(Comment m) {
+	public Message(Message m) {
 		this.id = m.id;
 		this.userId = m.userId;
 		this.text = m.text;
+		this.latitude = m.latitude;
+		this.longitude = m.longitude;
 		this.date = m.date;
 	}
 	
@@ -33,17 +36,23 @@ public class Comment {
 	public void setUserId(Long user) {
 		this.userId = user;
 	}
-	public Long getMessageId() {
-		return messageId;
-	}
-	public void setMessageId(Long messageId) {
-		this.messageId = messageId;
-	}
 	public String getText() {
 		return text;
 	}
 	public void setText(String text) {
 		this.text = text;
+	}
+	public String getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+	public String getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
 	}
 	public Long getDate() {
 		return date;

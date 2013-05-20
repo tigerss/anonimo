@@ -3,19 +3,19 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 23.03.2013 13:48:37 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="com.anonimo.api.model.UserEvent" table="USER_EVENT">
+    <class name="com.anonimo.api.model.database.User" table="USER">
         <id name="id" type="java.lang.Long">
             <column name="ID" />
             <generator class="identity" />
         </id>
-        <property name="userId" type="java.lang.Long">
-            <column name="USER_ID" />
+        <property name="name" type="java.lang.String">
+            <column name="NAME" />
         </property>
-        <property name="eventId" type="java.lang.Long">
-            <column name="EVENT_ID" />
+        <property name="password" type="java.lang.String">
+            <column name="PASSWORD" />
         </property>
-        <property name="text" type="java.lang.String">
-            <column name="TEXT" />
+        <property name="email" type="java.lang.String">
+            <column name="EMAIL" />
         </property>
     </class>
 </hibernate-mapping>
