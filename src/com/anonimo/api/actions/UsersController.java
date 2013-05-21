@@ -55,6 +55,11 @@ public class UsersController implements ModelDriven<Object> {
     	DatabaseHelper.update(model);
     	return new DefaultHttpHeaders("changePasword");
     }
+    
+    public DefaultHttpHeaders events() {
+    	list = DatabaseHelper.getEventsJoinedByUser(model);
+    	return new DefaultHttpHeaders();
+    }
 
     public void setId(String id) {
     	this.id = id;

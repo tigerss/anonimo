@@ -10,16 +10,12 @@ import org.apache.struts2.rest.HttpHeaders;
 import com.anonimo.api.model.database.UserEvent;
 import com.anonimo.api.util.DatabaseHelper;
 import com.opensymphony.xwork2.ModelDriven;
-import com.opensymphony.xwork2.Validateable;
-import com.opensymphony.xwork2.ValidationAwareSupport;
 
 @Results({
     @Result(name="success", type="redirectAction", params = {"actionName" , "messages"})
 })
-public class User_eventsController extends ValidationAwareSupport implements ModelDriven<Object>, Validateable {
+public class User_eventsController implements ModelDriven<Object> {
 
-	private static final long serialVersionUID = 1L;
-	
 	private String id;
 	private UserEvent model = new UserEvent();
     private Collection<UserEvent> list;
@@ -36,7 +32,6 @@ public class User_eventsController extends ValidationAwareSupport implements Mod
     
     public HttpHeaders create() {
     	DatabaseHelper.save(model);
-    	addActionMessage("New message created successfully");
     	return new DefaultHttpHeaders("create").setLocationId(model.getId());
     }
 
@@ -64,11 +59,4 @@ public class User_eventsController extends ValidationAwareSupport implements Mod
     public Object getModel() {
         return (list != null ? list : model);
     }
-
-	@Override
-	public void validate() {
-//        if (model.getText() == null || model.getText().length() ==0) {
-//            addFieldError("text", "The user event text is empty");
-//        }
-	}
 }

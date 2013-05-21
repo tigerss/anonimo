@@ -10,16 +10,12 @@ import org.apache.struts2.rest.HttpHeaders;
 import com.anonimo.api.model.database.Event;
 import com.anonimo.api.util.DatabaseHelper;
 import com.opensymphony.xwork2.ModelDriven;
-import com.opensymphony.xwork2.Validateable;
-import com.opensymphony.xwork2.ValidationAwareSupport;
 
 @Results({
     @Result(name="success", type="redirectAction", params = {"actionName" , "messages"})
 })
-public class EventsController extends ValidationAwareSupport implements ModelDriven<Object>, Validateable {
+public class EventsController implements ModelDriven<Object> {
 
-	private static final long serialVersionUID = 1L;
-	
 	private String id;
 	private Event model = new Event();
     private Collection<Object> list;
@@ -36,7 +32,6 @@ public class EventsController extends ValidationAwareSupport implements ModelDri
     
     public HttpHeaders create() {
     	DatabaseHelper.save(model);
-    	addActionMessage("New message created successfully");
     	return new DefaultHttpHeaders("create").setLocationId(model.getId());
     }
 
@@ -69,11 +64,4 @@ public class EventsController extends ValidationAwareSupport implements ModelDri
     public Object getModel() {
         return (list != null ? list : model);
     }
-
-	@Override
-	public void validate() {
-        if (model.getDescription() == null || model.getDescription().length() ==0) {
-            addFieldError("description", "The description is empty");
-        }
-	}
 }

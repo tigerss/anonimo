@@ -2,8 +2,6 @@ package com.anonimo.api.actions;
 
 import java.util.Collection;
 
-import org.apache.struts2.convention.annotation.Result;
-import org.apache.struts2.convention.annotation.Results;
 import org.apache.struts2.rest.DefaultHttpHeaders;
 import org.apache.struts2.rest.HttpHeaders;
 
@@ -13,9 +11,6 @@ import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Validateable;
 import com.opensymphony.xwork2.ValidationAwareSupport;
 
-@Results({
-    @Result(name="success", type="redirectAction", params = {"actionName" , "messages"})
-})
 public class CommentsController extends ValidationAwareSupport implements ModelDriven<Object>, Validateable {
 
 	private static final long serialVersionUID = 1L;

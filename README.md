@@ -101,6 +101,18 @@ Response:
 
 <br>POST /users/1/updateInfo</br> (Update user through POST)
 
+GET /users/32/events returns events joined by User having ID 32
+```
+[
+    {
+       "eventId": 9,
+       "id": 4,
+       "text": "joined event",
+       "userId": 32
+   }
+]
+```
+
 ### MESSAGES
 
 <b>JSON EXAMPLE:</b> 

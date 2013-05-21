@@ -155,6 +155,12 @@ public class DatabaseHelper {
 		return result;
 	}
 
+	@SuppressWarnings("unchecked")
+	public static Collection<Object> getEventsJoinedByUser(User user) {
+		return (Collection<Object>) queryDatabase("from UserEvent e where e.userId="
+				+ user.getId());
+	}
+
 	public static void save(Object model) {
 		HibernateUtil.insertObject(model);
 	}
