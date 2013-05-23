@@ -178,6 +178,18 @@ Response:
    }
 ]
 ```
+
+GET /messages/{id}/photo (get photos for a message)
+Response:
+```json
+[
+	{
+	   "id": 1,
+	   "messageId": 1,
+	   "image": "base64_string"
+	}
+]
+```
  
 ### COMMENTS
 
@@ -298,4 +310,26 @@ DELETE 	/votes/1 	delete 			id="1"
 <br/>
 GET 	/votes/1 	show 			id="1"
 
+### PHOTOS
 
+<b>JSON:</b>
+```json
+{
+   "id": 1,
+   "messageId": 1,
+   "image": "base64_string"
+}
+```
+
+<b>CUSTOM ACTIONS:</b>   
+
+GET /messages/{id}/photo (get photos for a message)
+
+<b>DEFAULT ACTIONS:</b>
+
+POST 	/photos 	create	 
+PUT 	/photos/1 	update 			id="1"
+<br/>
+DELETE 	/photos/1 	delete 			id="1"
+<br/>
+GET 	/photos/1 	show 			id="1"

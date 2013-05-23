@@ -26,5 +26,6 @@
         <mapping resource="com/anonimo/api/model/database/Event.hbm.xml"/>
         <mapping resource="com/anonimo/api/model/database/UserEvent.hbm.xml"/>
         <mapping resource="com/anonimo/api/model/database/Vote.hbm.xml"/>
+        <mapping resource="com/anonimo/api/model/database/Photo.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

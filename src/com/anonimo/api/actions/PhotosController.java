@@ -1,73 +1,65 @@
 package com.anonimo.api.actions;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.apache.struts2.rest.DefaultHttpHeaders;
 import org.apache.struts2.rest.HttpHeaders;
 
-import com.anonimo.api.model.database.Message;
+import com.anonimo.api.model.Photos;
+import com.anonimo.api.model.database.Photo;
 import com.anonimo.api.util.DatabaseHelper;
 import com.opensymphony.xwork2.ModelDriven;
 
-public class MessagesController implements ModelDriven<Object> {
+public class PhotosController implements ModelDriven<Object> {
 
 	private String id;
-	private Message model = new Message();
+	private Photos model = new Photos();
     private Collection<Object> list;
 	
 	public HttpHeaders index() {
-		list = DatabaseHelper.getAllMessages();
+		Collection<Object> blobPhotos = DatabaseHelper.getAllPhotos();
+		list = new ArrayList<Object>();
+		for (Object o : blobPhotos) {
+			if (!(o instanceof Photo))
+				continue;
+			
+			Photo raw = (Photo) o;
+			list.add(new Photos(raw));
+		}
 		return new DefaultHttpHeaders("index").disableCaching();
 	}
 	
-    // GET /orders/new
-    public String editNew() {
-        model = new Message();
-        return "editNew";
-    }
-	
-    // Handles /messages/{id} GET requests
+    // Handles /photos/{id} GET requests
     public HttpHeaders show() {
         return new DefaultHttpHeaders("show");
     }
     
     public HttpHeaders create() {
-    	DatabaseHelper.save(model);
+    	Photo photo = new Photo(model);
+    	DatabaseHelper.save(photo);
     	return new DefaultHttpHeaders("create").setLocationId(model.getId());
     }
 
     // Handles /orders/{id} PUT requests
     public DefaultHttpHeaders update() {
-    	DatabaseHelper.update(model);
+    	Photo photo = new Photo(model);
+    	DatabaseHelper.update(photo);
         return new DefaultHttpHeaders("update");
     }
     
     // Handles /messages/{id} DELETE requests
     public DefaultHttpHeaders destroy() {
-    	DatabaseHelper.destroy(model);
+    	Photo photo = new Photo(model);
+    	DatabaseHelper.destroy(photo);
     	return new DefaultHttpHeaders("destroy");
-    }
-    
-    public DefaultHttpHeaders comments() {
-    	list = DatabaseHelper.getCommentsOfMessage(model);
-    	return new DefaultHttpHeaders("comments");
-    }
-    
-    public DefaultHttpHeaders votes() {
-    	list = DatabaseHelper.getVotesOfMessage(model);
-    	return new DefaultHttpHeaders("votes");
-    }
-    
-    public DefaultHttpHeaders photo() {
-    	list = DatabaseHelper.getPhotoOfMessage(model);
-    	return new DefaultHttpHeaders();
     }
     
     public void setId(String id) {
     	this.id = id;
     	
         if (this.id != null) {
-            this.model = DatabaseHelper.getMessageById(Long.valueOf(this.id));
+            this.model = DatabaseHelper.getPhotoById(Long.valueOf(this.id));
         }
     }
     

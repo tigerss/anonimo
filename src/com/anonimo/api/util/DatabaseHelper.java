@@ -11,9 +11,11 @@ import org.jboss.logging.Logger;
 
 import com.anonimo.api.model.EventParticipants;
 import com.anonimo.api.model.MessageVotes;
+import com.anonimo.api.model.Photos;
 import com.anonimo.api.model.database.Comment;
 import com.anonimo.api.model.database.Event;
 import com.anonimo.api.model.database.Message;
+import com.anonimo.api.model.database.Photo;
 import com.anonimo.api.model.database.User;
 import com.anonimo.api.model.database.UserEvent;
 import com.anonimo.api.model.database.Vote;
@@ -85,6 +87,15 @@ public class DatabaseHelper {
 		}
 	}
 
+	public static Photos getPhotoById(long id) {
+		try {
+			Photo photo = getObjectById(id, Photo.TAG);
+			return new Photos(photo);
+		} catch (ClassCastException ex) {
+			return new Photos();
+		}
+	}
+
 	@SuppressWarnings("unchecked")
 	public static Collection<Object> getAllUsers() {
 		Collection<Object> users = new ArrayList<Object>();
@@ -143,6 +154,26 @@ public class DatabaseHelper {
 		
 		return result;
 	}
+
+	@SuppressWarnings("unchecked")
+	public static Collection<Object> getPhotoOfMessage(Message model) {
+		try {
+			List<?> photoOfMessage = queryDatabase("from Photo p where p.messageId=" + model.getId());
+			
+//			Photo photo = (Photo)photoOfMessage.get(0);
+			
+			Collection<Object> result = new ArrayList<Object>();
+			
+			for (Photo p : (List<Photo>)photoOfMessage) {
+				result.add(new Photos(p));
+			}
+			
+			return result;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return new ArrayList<Object>();
+		}
+	}
 	
 	public static Collection<Object> getParticipants(Event model) {
 		List<?> participants = queryDatabase("SELECT COUNT(*) from UserEvent e where e.eventId="+model.getId());
@@ -196,6 +227,11 @@ public class DatabaseHelper {
 	@SuppressWarnings("unchecked")
 	public static Collection<Vote> getAllVotes() {
 		return (Collection<Vote>) queryDatabase("from Vote");
+	}
+
+	@SuppressWarnings("unchecked")
+	public static Collection<Object> getAllPhotos() {
+		return (Collection<Object>) queryDatabase("from Photo");
 	}
 	
 	@SuppressWarnings("unchecked")
